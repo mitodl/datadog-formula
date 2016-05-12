@@ -2,7 +2,7 @@
 datadog
 =======
 
-SaltStack formula to install and manage datadog and associated plugins
+SaltStack formula for installing and managing DataDog and its integrations
 
 .. note::
 
