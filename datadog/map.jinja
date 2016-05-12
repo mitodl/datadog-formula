@@ -1,0 +1,14 @@
+{% set datadog = salt['grains.filter_by']({
+    'default': {
+        'pkg': 'datadog',
+        'service': 'datadog',
+        'conf_file': '/etc/datadog/datadog.conf',
+        'config': {
+            'key': 'value',
+        },
+    },
+    'Debian': {
+    },
+    'RedHat': {
+    },
+}, grain='os_family', merge=salt['pillar.get']('datadog:lookup'), base='default') %}
