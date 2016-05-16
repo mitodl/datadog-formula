@@ -1,3 +1,5 @@
 base:
   '*':
     - datadog
+    - datadog.plugins
+    - datadog.tests

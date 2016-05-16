@@ -1,14 +1,20 @@
 {% set datadog = salt['grains.filter_by']({
     'default': {
-        'pkg': 'datadog',
-        'service': 'datadog',
-        'conf_file': '/etc/datadog/datadog.conf',
+        'pkg_name': 'datadog-agent',
+        'service': 'datadog-agent',
         'config': {
-            'key': 'value',
-        },
+            'dd_url': 'https://app.datadoghq.com',
+            'mount': 'no',
+        }
     },
     'Debian': {
+        'plugin_pkgs': [],
+        'pkg_deps': [
+            'apt-transport-https'
+        ],
     },
     'RedHat': {
+        'plugin_pkgs': [],
+        'pkg_deps': [],
     },
-}, grain='os_family', merge=salt['pillar.get']('datadog:lookup'), base='default') %}
+}, grain='os_family', merge=salt['pillar.get']('datadog:overrides'), base='default') %}

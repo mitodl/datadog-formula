@@ -3,7 +3,7 @@ os: RedHat, CentOS, Ubuntu, Debian
 os_family: RedHat, Debian
 version: 201605
 release: 1
-summary: SaltStack formula to install and manage datadog and associated plugins
-description: SaltStack formula to install and manage datadog and associated plugins
+summary: SaltStack formula for installing and managing DataDog and its integrations
+description: SaltStack formula for installing and managing DataDog and its integrations
 top_level_dir: datadog
 recommended: 
