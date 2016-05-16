@@ -1,9 +1,16 @@
 datadog:
+  overrides:
+    config:
+      tags: {{ salt.grains.get('roles', ['datadog']) }}
   pkg: mydatadog
-  conf_file: /usr/local/etc/datadog/datadog.conf
-  config:
-    api_key: your_datadog_api_key
+  api_key: your_datadog_api_key
   integrations:
+    mongodb:
+      datadog_password: NotSecure
+      admin_password: NotReal
+    mysql:
+      datadog_password: NotSecure
+      host_access: '*.*'
     elasticsearch:
       settings:
         instances:

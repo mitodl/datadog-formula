@@ -1,8 +1,8 @@
 {% set dd_mongo = salt.pillar.get(
     'datadog:integrations:mongodb',
     {
-        'passwd': 'Ch@ng3me!',
-        'password': 'N0tS3cure!'
+        'datadog_passwordd': 'Ch@ng3me!',
+        'admin_password': 'N0tS3cure!'
     }) %}
 
 install_pymongo:
@@ -12,7 +12,7 @@ install_pymongo:
 create_datadog_mongo_user:
   mongodb_user.present:
     - name: datadog
-    - passwd: {{ dd_mongo.passwd }}
+    - passwd: {{ dd_mongo.datadog_password }}
     - user: admin
-    - password: {{ dd_mongo.password }}
+    - password: {{ dd_mongo.admin_password }}
     - database: admin

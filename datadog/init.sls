@@ -50,4 +50,5 @@ datadog_configuration:
         - service: datadog_agent_service
     - contents: |
         [Main]
+        api_key: {{ salt.pillar.get('datadog:api_key', '') }}
         {{ datadog.config | yaml(False) | indent(8, true) }}

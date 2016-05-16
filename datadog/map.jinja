@@ -5,7 +5,6 @@
         'config': {
             'dd_url': 'https://app.datadoghq.com',
             'mount': 'no',
-            'api_key': '',
         }
     },
     'Debian': {
@@ -18,4 +17,4 @@
         'plugin_pkgs': [],
         'pkg_deps': [],
     },
-}, grain='os_family', merge=salt['pillar.get']('datadog'), base='default') %}
+}, grain='os_family', merge=salt['pillar.get']('datadog:overrides'), base='default') %}
