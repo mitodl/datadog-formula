@@ -6,7 +6,7 @@ test_datadog_package_archive_configured:
     - name: /etc/apt/sources.list.d/datadog.list
     - exists: True
     - contains:
-        parameter: https://apt.datadoghq.com/
+        parameter: https://apt.datadoghq.com
         expected: True
         comparison: is_
     {% elif grains['os_family'].lower() == 'redhat' %}
@@ -30,3 +30,9 @@ test_datadog_config_file:
         parameter: app.datadoghq.com
         expected: True
         comparison: is_
+
+test_datadog_service_running:
+  testinfra.service:
+    - name: datadog-agent
+    - is_running: True
+    - is_enabled: True

@@ -1,6 +1,10 @@
 datadog:
-  lookup:
-    pkg: mydatadog
-    conf_file: /usr/local/etc/datadog/datadog.conf
+  pkg: mydatadog
+  conf_file: /usr/local/etc/datadog/datadog.conf
   config:
-    key: othervalue
+    api_key: your_datadog_api_key
+  integrations:
+    elasticsearch:
+      settings:
+        instances:
+          - url: http://localhost:9200
