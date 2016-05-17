@@ -10,7 +10,7 @@ datadog_plugin_configuration_directory:
 {% for name, settings in salt.pillar.get('datadog:integrations', {}).items() %}
 configure_{{ name }}_integration:
   file.managed:
-    - name: /etc/dd-agent/conf.d/{{ name }}.yml
+    - name: /etc/dd-agent/conf.d/{{ name }}.yaml
     - contents: |
         init_config:
 

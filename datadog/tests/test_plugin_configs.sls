@@ -3,7 +3,7 @@
 {% for name, settings in integrations.items() %}
 ensure_{{ name }}_integration_settings_files_configured:
   testinfra.file:
-    - name: /etc/dd-agent/conf.d/{{ name }}.yml
+    - name: /etc/dd-agent/conf.d/{{ name }}.yaml
     - exists: True
     - contains:
         parameter: init_config
