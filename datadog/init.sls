@@ -51,4 +51,4 @@ datadog_configuration:
     - contents: |
         [Main]
         api_key: {{ salt.pillar.get('datadog:api_key', '') }}
-        {{ datadog.config | yaml(False) | indent(8, true) }}
+        {{ datadog.config | yaml(False) | indent(8) }}

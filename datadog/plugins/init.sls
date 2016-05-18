@@ -14,7 +14,7 @@ configure_{{ name }}_integration:
     - contents: |
         init_config:
 
-        {{ settings.settings | yaml(False) | indent(8, True) }}
+        {{ settings.settings | yaml(False) | indent(8) }}
     - watch_in:
         - service: datadog_agent_service
 {% endfor %}
