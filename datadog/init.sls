@@ -22,7 +22,7 @@ datadog_package_archive:
     {% if grains['os_family'].lower() == 'debian' %}
     - name: deb https://apt.datadoghq.com/ stable main
     - keyserver: keyserver.ubuntu.com
-    - keyid: C7A7DA52
+    - keyid: 382E94DE
     - file: /etc/apt/sources.list.d/datadog.list
     - require:
         - pkg: datadog_pkg_dependencies
