@@ -5,3 +5,8 @@ datadog formula
 -------------------
 
 - First release
+
+201907 (2019-07-26)
+-------------------
+
+- Updated to install v6 agent

@@ -1,7 +1,7 @@
 name: datadog
 os: RedHat, CentOS, Ubuntu, Debian
 os_family: RedHat, Debian
-version: 201605
+version: 201907
 release: 1
 summary: SaltStack formula for installing and managing DataDog and its integrations
 description: SaltStack formula for installing and managing DataDog and its integrations

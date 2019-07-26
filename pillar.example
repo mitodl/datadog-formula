@@ -1,7 +1,6 @@
 datadog:
-  overrides:
-    config:
-      tags: {{ salt.grains.get('roles', ['datadog']) }}
+  config:
+    tags: {{ salt.grains.get('roles', ['datadog']) }}
   pkg: mydatadog
   api_key: your_datadog_api_key
   integrations:

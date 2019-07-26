@@ -5,12 +5,12 @@ include:
 
 datadog_plugin_configuration_directory:
   file.directory:
-    - name: /etc/dd-agent/conf.d
+    - name: /etc/datadog-agent/conf.d
 
 {% for name, settings in salt.pillar.get('datadog:integrations', {}).items() %}
 configure_{{ name }}_integration:
   file.managed:
-    - name: /etc/dd-agent/conf.d/{{ name }}.yaml
+    - name: /etc/datadog-agent/conf.d/{{ name }}.d/conf.yaml
     - contents: |
         init_config:
 
