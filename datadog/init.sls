@@ -20,7 +20,7 @@ datadog_package_archive:
   pkgrepo.managed:
     - humanname: 'Datadog Agent'
     {% if grains['os_family'].lower() == 'debian' %}
-    - name: deb https://apt.datadoghq.com/ stable 6
+    - name: deb https://apt.datadoghq.com/ stable {{ datadog.major_version }}
     - keyserver: keyserver.ubuntu.com
     - keyid: A2923DFF56EDA6E76E55E492D3A80E30382E94DE
     - file: /etc/apt/sources.list.d/datadog.list

@@ -1,5 +1,6 @@
 {% set datadog = salt['grains.filter_by']({
     'default': {
+        'major_version': 7,
         'pkg_name': 'datadog-agent',
         'service': 'datadog-agent',
         'config': {
