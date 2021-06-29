@@ -1,4 +1,5 @@
 {% from "datadog/map.jinja" import datadog with context %}
+{% set api_key = salt.pillar.get('datadog:api_key', '') %}
 
 include:
   - .service
@@ -8,40 +9,9 @@ datadog_pkg_dependencies:
     - pkgs: {{ datadog.pkg_deps + datadog.plugin_pkgs }}
     - refresh: True
 
-{% if grains['os_family'].lower() == 'redhat' %}
-install_datadog_repo_gpg_key:
+datadog_install:
   cmd.run:
-    - name: rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-    - require_in:
-        - pkgrepo: datadog_package_archive
-{% endif %}
-
-datadog_package_archive:
-  pkgrepo.managed:
-    - humanname: 'Datadog Agent'
-    {% if grains['os_family'].lower() == 'debian' %}
-    - name: deb https://apt.datadoghq.com/ stable {{ datadog.major_version }}
-    - keyserver: hkp://keyserver.ubuntu.com:80
-    - keyid: D75CEA17048B9ACBF186794B32637D44F14F620E
-    - file: /etc/apt/sources.list.d/datadog.list
-    - require:
-        - pkg: datadog_pkg_dependencies
-    {% elif grains['os_family'].lower() == 'redhat' %}
-    - name: datadog
-    - baseurl: https://yum.datadoghq.com/stable/6/{{ grains['cpuarch'] }}/
-    - keyurl: https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-    - enabled: True
-    - gpgcheck: True
-    {% endif %}
-
-datadog_package:
-  pkg.latest:
-    - name: {{ datadog.pkg_name }}
-    - refresh: True
-    - require:
-        - pkgrepo: datadog_package_archive
-    - require_in:
-        - service: datadog_agent_service
+    - name: 'DD_AGENT_MAJOR_VERSION={{ datadog.major_version }} DD_API_KEY=api_key DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"'
 
 datadog_configuration:
   file.managed:
@@ -49,5 +19,5 @@ datadog_configuration:
     - watch_in:
         - service: datadog_agent_service
     - contents: |
-        api_key: {{ salt.pillar.get('datadog:api_key', '') }}
+        api_key: api_key
         {{ datadog.config | yaml(False) | indent(8) }}
