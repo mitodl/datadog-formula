@@ -11,7 +11,11 @@ datadog_pkg_dependencies:
 
 datadog_install:
   cmd.run:
-    - name: 'DD_AGENT_MAJOR_VERSION={{ datadog.major_version }} DD_API_KEY=api_key DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"'
+    - name: curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+    - env:
+      - DD_AGENT_MAJOR_VERSION: {{ datadog.major_version }}
+      - DD_API_KEY: {{ api_key }}
+      - DD_SITE: "datadoghq.com"
 
 datadog_configuration:
   file.managed:
@@ -19,5 +23,5 @@ datadog_configuration:
     - watch_in:
         - service: datadog_agent_service
     - contents: |
-        api_key: api_key
+        api_key: {{ api_key }}
         {{ datadog.config | yaml(False) | indent(8) }}
