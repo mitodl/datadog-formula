@@ -1,5 +1,6 @@
 {% from "datadog/map.jinja" import datadog with context %}
 {% set api_key = salt.pillar.get('datadog:api_key', '') %}
+{% set datadog_env = salt.pillar.get('datadog:environment') %}
 
 include:
   - .service
@@ -10,8 +11,8 @@ datadog_pkg_dependencies:
     - refresh: True
 
 datadog_install:
-  cmd.run:
-    - name: curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+  cmd.script:
+    - source: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
     - env:
       - DD_AGENT_MAJOR_VERSION: {{ datadog.major_version }}
       - DD_API_KEY: {{ api_key }}
